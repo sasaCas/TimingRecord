@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TimimngRecord</string>
+    <string name="start">Iniciar</string>
+    <string name="pause">Pausar</string>
+    <string name="finalize">Finalizar sesión</string>
+    <string name="new_time">Agregar Tiempo</string>
+    <string name="distance">distance</string>
+    <string name="description">description</string>
+    <string name="cancel">cancelar</string>
+    <string name="save">guardar</string>
+</resources>
