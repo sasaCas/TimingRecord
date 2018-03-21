@@ -17,5 +17,41 @@ public class DataBaseManager {
 
     }
 
+    // Cuando vamos a escribir comprueva que no sea null y que no esté abierta
+    // la conexión.
+    public SQLiteDatabase openWriteableDB(){
+        if(sqLiteDatabase == null || !sqLiteDatabase.isOpen())
+            sqLiteDatabase = this.helper.getWritableDatabase();
+
+        return sqLiteDatabase;
+
+    }
+
+
+    // Utilizamos este método para leer en la base de datos
+    public SQLiteDatabase openReableDB(){
+        if(sqLiteDatabase == null || !sqLiteDatabase.isOpen())
+            sqLiteDatabase = this.helper.getReadableDatabase();
+
+        return sqLiteDatabase;
+
+    }
+
+    public void close(SQLiteDatabase db){
+        if (db != null)
+            db.close();
+
+    }
+
+    public static String timeTable = "CREATE TABLE time(id INTEGER NOT NULL PRIMARY KEY," +
+            "time TEXT(100) NOT NULL," +
+            "date TEXT(100) NULL," +
+            "distance TEXT(100) NULL," +
+            "description TEXT(100) NULL";
+
+
+
+
+
 
 }
