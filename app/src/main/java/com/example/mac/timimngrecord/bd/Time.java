@@ -1,5 +1,6 @@
 package com.example.mac.timimngrecord.bd;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -135,6 +136,31 @@ public class Time {
             return null;
         }
         return null;
+    }
+
+    // Salvar un registro
+    public boolean save(Time time){
+
+        try {
+            ContentValues values = new ContentValues();
+            values.put("time", time.getTime());
+            values.put("date", time.getDate());
+            values.put("distance", time.getDistance());
+            values.put("description", time.getDescription());
+            // Si ocurre lo siguiente se confirma la inserción que nos
+            // devuelve un número entero, de lo contrario
+            // nos devolvería un , 0 ,.
+            boolean result = database.insert(table, null, values)!=0;
+            // Ahora cerramos la conexión
+            dataBaseManager.closeDB(database);
+
+
+        } catch(Exception e) {
+            Log.e("Time/getAllTime:", e.toString());
+            return false; // Aquí retornamos un false
+
+        }
+
     }
 
 
