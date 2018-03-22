@@ -1,6 +1,7 @@
 package com.example.mac.timimngrecord.bd;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -20,6 +21,10 @@ public class Time {
 
     private static DataBaseManager dataBaseManager;
     private static SQLiteDatabase database;
+
+    // Añadimos otra estática con el nombre de la tabla para no tener errores en las
+    // líneas que estamos añadiendo abajo
+    private static String table = "time";
 
     public Time(){
 
@@ -94,7 +99,19 @@ public class Time {
     // base de datos.
     public ArrayList<Time> getAllTime(){
         try {
-
+            ArrayList<Time> allTime = new ArrayList<>();
+            // elegimos todoo
+            Cursor cursor = database.rawQuery("select * from " + table, null);
+            // extraemos un cursor de toda la tabla
+            while (cursor.moveToNext()){
+                Time time = new Time(cursor.getInt(0), cursor.getString(1)
+                        cursor.getString(2), cursor.getString(3), cursor.getString(4));
+                allTime.add(time);
+            }
+            // Una vez extraídos todos los registros, cerramos la llamada.
+            database.close();
+            // Y retornamos el ArrayList<Time>, de nombre allTime
+            return allTime;
 
         } catch (Exception ex){
             Log.e("Time/getAllTime", ex.toString());
