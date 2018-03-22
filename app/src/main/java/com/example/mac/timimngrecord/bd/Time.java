@@ -1,6 +1,10 @@
 package com.example.mac.timimngrecord.bd;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 /**
  * Created by mac on 22/3/18.
@@ -13,6 +17,9 @@ public class Time {
     private String date;
     private String distance;
     private String description;
+
+    private static DataBaseManager dataBaseManager;
+    private static SQLiteDatabase database;
 
     public Time(){
 
@@ -74,7 +81,36 @@ public class Time {
 
     public Time(Context context, boolean write){
 
+        // Agregamos el contexto a la base de datos para poder usarla
+        dataBaseManager = new DataBaseManager(context);
+        if(write) // Si es true es que quiero escribir
+            database = dataBaseManager.openWriteableDB();
+        else // Si es false entonces lo que quiero es sólo leer
+            database = dataBaseManager.openReableDB();
+
     }
 
+    // Añadimos un método para leer todos los registros que hay en la
+    // base de datos.
+    public ArrayList<Time> getAllTime(){
+        try {
+
+
+        } catch (Exception ex){
+            Log.e("Time/getAllTime", ex.toString());
+            return null;
+        }
+    }
+
+
+
 }
+
+
+
+
+
+
+
+
 
