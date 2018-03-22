@@ -104,12 +104,12 @@ public class Time {
             Cursor cursor = database.rawQuery("select * from " + table, null);
             // extraemos un cursor de toda la tabla
             while (cursor.moveToNext()){
-                Time time = new Time(cursor.getInt(0), cursor.getString(1)
+                Time time = new Time(cursor.getInt(0), cursor.getString(1),
                         cursor.getString(2), cursor.getString(3), cursor.getString(4));
                 allTime.add(time);
             }
             // Una vez extraídos todos los registros, cerramos la llamada.
-            database.close();
+            dataBaseManager.closeDB(database); // Estaba mal, ahora está bien.
             // Y retornamos el ArrayList<Time>, de nombre allTime
             return allTime;
 
@@ -118,6 +118,26 @@ public class Time {
             return null;
         }
     }
+
+    // Vamos a extraer sólo un registro
+    public Time getTime(int id){ // le pedimos el id para que identifique el registro
+        try {
+
+            Cursor cursor = database.rawQuery("select * from " + table +
+                    "where id='"+id+"'", null);
+            while (cursor.moveToFirst()){ // move to first para que nos seleccione sólo el primero
+                return new Time(cursor.getInt(0), cursor.getString(1),
+                        cursor.getString(2), cursor.getString(3), cursor.getString(4));
+            }
+            dataBaseManager.closeDB(database); // Esto cierra la conexión a SQLite
+        } catch (Exception e){
+            Log.e("Time/getAllTime:", e.toString());
+            return null;
+        }
+        return null;
+    }
+
+
 
 
 

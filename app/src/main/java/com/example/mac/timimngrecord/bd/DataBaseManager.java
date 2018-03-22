@@ -17,7 +17,7 @@ public class DataBaseManager {
 
     }
 
-    // Cuando vamos a escribir comprueva que no sea null y que no esté abierta
+    // Cuando vamos a escribir comprueba que no sea null y que no esté abierta
     // la conexión.
     public SQLiteDatabase openWriteableDB(){
         if(sqLiteDatabase == null || !sqLiteDatabase.isOpen())
@@ -37,7 +37,7 @@ public class DataBaseManager {
 
     }
 
-    public void close(SQLiteDatabase db){
+    public void closeDB(SQLiteDatabase db){ // Le llamamos closeDB
         if (db != null)
             db.close();
 
