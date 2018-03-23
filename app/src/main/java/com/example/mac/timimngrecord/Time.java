@@ -1,10 +1,12 @@
-package com.example.mac.timimngrecord.bd;
+package com.example.mac.timimngrecord;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import com.example.mac.timimngrecord.bd.DataBaseManager;
 
 import java.util.ArrayList;
 
