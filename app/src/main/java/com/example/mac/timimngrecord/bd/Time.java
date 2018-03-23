@@ -153,6 +153,7 @@ public class Time {
             boolean result = database.insert(table, null, values)!=0;
             // Ahora cerramos la conexión
             dataBaseManager.closeDB(database);
+            return result;
 
 
         } catch(Exception e) {
