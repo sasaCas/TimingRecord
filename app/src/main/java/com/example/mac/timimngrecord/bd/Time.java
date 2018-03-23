@@ -157,10 +157,53 @@ public class Time {
 
 
         } catch(Exception e) {
-            Log.e("Time/getAllTime:", e.toString());
+            Log.e("Time/save:", e.toString());
             return false; // Aquí retornamos un false
 
         }
+
+    }
+
+    // Vamos a crear la manera de borrar registros
+    public boolean delete(int id){
+
+        try {
+
+            boolean result = database.delete(table,"id='"+id+"'",null)!=0;
+            dataBaseManager.closeDB(database);
+            return result;
+
+        } catch(Exception e) {
+            Log.e("Time/delete:", e.toString());
+            return false; // Aquí retornamos un false
+
+        }
+
+    }
+    // Aquí para modificar registros
+    public boolean update(Time time){
+
+        try {
+            ContentValues values = new ContentValues();
+            values.put("time", time.getTime());
+            values.put("date", time.getDate());
+            values.put("distance", time.getDistance());
+            values.put("description", time.getDescription());
+            // Si ocurre lo siguiente se confirma la inserción que nos
+            // devuelve un número entero, de lo contrario
+            // nos devolvería un , 0 ,.
+            boolean result = database.update(table, values, "id='"+time.getId()+"'", null)!=0;
+            // Ahora cerramos la conexión
+            dataBaseManager.closeDB(database);
+            return result;
+
+
+        } catch(Exception e) {
+            Log.e("Time/update:", e.toString());
+            return false; // Aquí retornamos un false
+
+        }
+
 
     }
 
