@@ -47,7 +47,7 @@ public class DataBaseManager {
             "time TEXT(100) NOT NULL," +
             "date TEXT(100) NULL," +
             "distance TEXT(100) NULL," +
-            "description TEXT(100) NULL";
+            "description TEXT(100) NULL)";
 
 
 

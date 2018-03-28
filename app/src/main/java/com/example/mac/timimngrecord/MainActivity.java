@@ -8,6 +8,8 @@ import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -15,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat; // Atentos a este import
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
     private long timePause;
 
+    // Vamos a crear unas variables para darle vida al método recién creado , ShowListTime ,.
+    private ArrayList<Time> listTime;
+    private TimeAdapter adapter;
+    private RecyclerView recyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +56,15 @@ public class MainActivity extends AppCompatActivity {
        btnFinalize = findViewById(R.id.btnFinalize);
        btnPause = findViewById(R.id.btnPause);
 
+       // inicialiamos recyclerView aquí
+        recyclerView = findViewById(R.id.rvTime);
+
        chronometer = findViewById(R.id.chronometer2);
+
+       // Dentro del OnCreate llamamos a nuestro método recién creado
+        ShowListTime();
+
+
        btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,4 +133,32 @@ public class MainActivity extends AppCompatActivity {
        });
 
     }
+
+    // Y por fin creamos el método para mostrar el listado
+    public void ShowListTime() {
+
+        //LLamamos al recyclerView
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
+                LinearLayoutManager.VERTICAL, false));
+        // Enviamos false  aquí abajo porque
+        // queremos leer
+        listTime = new Time(getApplicationContext(), false).getAllTime();
+
+        // Miramos con este if si existe algún registro en la base de datos.
+        // Si existe alguno entonces lo agrega a nuestro recyclerView
+        if (listTime != null) {
+
+            adapter = new TimeAdapter(listTime, new TimeAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(Time time) {
+
+                }
+            });
+
+            recyclerView.setAdapter(adapter);
+
+        }
+    }
+
+
 }
