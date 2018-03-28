@@ -67,8 +67,31 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder>{
                                                 // Este true es porque queremos escribir
                     // llamamos a public Time(Context context, boolean write){
                     // y por eso le pasamos, true , porque queremos escribir.
-                    new Time(itemView.getContext(), true).delete(time.getId());
+                    //
+                    // ahora lo metemos en un if
+                if(new Time(itemView.getContext(), true).delete(time.getId())){
                     // El anterior time.getId() es para pasar el is del item
+
+                    // Una vez metido en el if, miramos si se elimina. Y si es cierto
+                    // entonces hacemos esto.
+                    listTime.remove(position);
+                    // y actualizamos nuestro recycleview
+                    notifyDataSetChanged();
+
+
+
+                }
+
+                }
+            });
+
+            //Añadimos aquí lo siguiente:
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(time);
+                    // Y hasta aquí este commit que hace que esté listo
+                    // el adaptador para nuestro recycler
                 }
             });
 
