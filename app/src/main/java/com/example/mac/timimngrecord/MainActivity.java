@@ -219,8 +219,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(time!=null){ // Si pasa esto es que quiere editar
-                    new Time(getApplicationContext(), true).update(); // true porque queremos modificar
-
+                    new Time(getApplicationContext(), true).update(getData(time.getId())); // true porque queremos modificar
+                    // el update este de arriba pide que le pasemos un objeto Time y no sólo
+                    // el , id , así que para obtener ese , id , construímos ese objeto Time
+                    // aposta para luego sacarle únicamente el , id , que necesitamos.
                 }
 
 
@@ -228,6 +230,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    // Elaboramos el método para la línea 222
+    // Así construimos otro objeto Time que es llamado desde el , update , de la línea 222
+    // Cogemos el id, construimos el objeto time y luego en esa línea 222 llamamos a
+    // este objeto
+    public Time getData(int id){
+        return new Time(id, txtTime.getText().toString(), txtDate.getText().toString(),
+                txtDistance.getText().toString(), txtdescrption.getText().toString());
     }
 
 
