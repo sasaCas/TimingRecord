@@ -120,7 +120,9 @@ public class MainActivity extends AppCompatActivity {
                                .setPositiveButton(getString(R.string.save), new DialogInterface.OnClickListener() {
                                    @Override
                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                    
+                                    // Si pulsamos guardar, entonces hacemos esto
+                                       newTime(null); // , null , porque no queremos editar
+                                       dialogInterface.dismiss();
                                    }
                                }).setNegativeButton(getString(R.string.restart), new DialogInterface.OnClickListener() {
                            @Override
@@ -170,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
             adapter = new TimeAdapter(listTime, new TimeAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(Time time) {
+                    // cuando toquemos un item nos saldrá la ventana de dialog
+                    newTime(time);
 
                 }
             });
