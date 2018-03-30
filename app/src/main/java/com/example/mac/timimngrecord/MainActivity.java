@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat; // Atentos a este import
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean startClick;
 
     // Cuidado al importar esto, porque por defecto importa otro tipo
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            // En este punto del commit vamos a usar esta variable , date ,.
+    private SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
 
     private long timePause;
 
@@ -178,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Creamos un nuevo método para llamar al layout alertdialog_new
-    public void newTime(Time time){ // Para un new Time recibimos el Time
+    public void newTime(final Time time){ // Para un new Time recibimos el Time
         // Aquí dentro mandamos a llamar a los componentes
         txtTime = dialog.findViewById(R.id.txtTime);
         txtdescrption = dialog.findViewById(R.id.txtDescription);
@@ -205,10 +207,26 @@ public class MainActivity extends AppCompatActivity {
 
             // Aquí le damos formato de horas, minutos y segundos
             txtTime.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
-
-
+            // y en esta línea vamos a dar formato a la fecha
+            txtDate.setText(date.format(Calendar.getInstance().getTime()));
 
         }
+        // Y por fin se muestra
+        dialog.show();
+        // Cuando demos un click en btnSave, entonces pasará esto
+        dialog.findViewById(R.id.btnSave).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(time!=null){ // Si pasa esto es que quiere editar
+                    new Time(getApplicationContext(), true).update(); // true porque queremos modificar
+
+                }
+
+
+            }
+        });
+
 
     }
 
