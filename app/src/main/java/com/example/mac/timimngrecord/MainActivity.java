@@ -2,6 +2,7 @@ package com.example.mac.timimngrecord;
 
 
 
+import android.app.Dialog; // Este es el recurso que estamos llamando con la declaración de Dialog
 import android.content.DialogInterface;
 import android.os.SystemClock;
 
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
@@ -45,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
     private TimeAdapter adapter;
     private RecyclerView recyclerView;
 
+    // Declaramos una variable para el layout alertdialog_new
+    private Dialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.rvTime);
 
        chronometer = findViewById(R.id.chronometer2);
+
+       // Asignamos el valor al Dialog que hemos declarado arriba.
+        dialog = new Dialog(MainActivity.this);
+        // y ahora componemos ese Dialog
+        dialog.setCancelable(false);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // y por fin llamamos al layout
+        dialog.setContentView(R.layout.alertdialog_new);
+
 
        // Dentro del OnCreate llamamos a nuestro método recién creado
         ShowListTime();
@@ -158,6 +172,18 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
 
         }
+    }
+
+    // Creamos un nuevo método para llamar al layout alertdialog_new
+    public void newTime(){
+        // Aquí dentro mandamos a llamar a los componentes
+        txtTime = dialog.findViewById(R.id.txtTime);
+        txtdescrption = dialog.findViewById(R.id.txtDescription);
+        txtDistance = dialog.findViewById(R.id.txtDistance);
+        txtDate = dialog.findViewById(R.id.txtDates);
+
+
+
     }
 
 
