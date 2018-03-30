@@ -247,5 +247,30 @@ public class MainActivity extends AppCompatActivity {
                 txtDistance.getText().toString(), txtdescrption.getText().toString());
     }
 
+    // CONTINUAMOS
+    // Con este método limpiamos las cajas de texto
+    public void clear(){
+        txtDate.setText("");
+        txtTime.setText("");
+        txtDistance.setText("");
+        txtdescrption.setText("");
+
+    }
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
