@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                                .setPositiveButton(getString(R.string.save), new DialogInterface.OnClickListener() {
                                    @Override
                                    public void onClick(DialogInterface dialogInterface, int i) {
-
+                                    
                                    }
                                }).setNegativeButton(getString(R.string.restart), new DialogInterface.OnClickListener() {
                            @Override
@@ -229,6 +229,15 @@ public class MainActivity extends AppCompatActivity {
                     // nuestra base de datos le va a asignar otro número, el número que
                     // le toque.
                     new Time(getApplicationContext(), false).save(getData(0));
+
+                    // ahora borramos los textos
+                    clear();
+                    // ponemos el cronómetro a 0
+                    chronometer.setBase(SystemClock.elapsedRealtime());
+                    timePause = 0; // ponemos esto a 0
+                    dialog.dismiss(); // y hacemos desaparecer el , dialog ,.
+                    // Y volvemos a mostrar la información actualizada.
+                    ShowListTime();
                 }
 
 
