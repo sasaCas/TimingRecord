@@ -223,6 +223,12 @@ public class MainActivity extends AppCompatActivity {
                     // el update este de arriba pide que le pasemos un objeto Time y no sólo
                     // el , id , así que para obtener ese , id , construímos ese objeto Time
                     // aposta para luego sacarle únicamente el , id , que necesitamos.
+                } else {
+                    // Si no es lo anterior, entonces queremos crear un registro nuevo
+                    // Le vamos a pasar un , id = 0 , pero en verdad nos da igual porque
+                    // nuestra base de datos le va a asignar otro número, el número que
+                    // le toque.
+                    new Time(getApplicationContext(), false).save(getData(0));
                 }
 
 
