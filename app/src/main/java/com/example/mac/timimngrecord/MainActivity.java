@@ -50,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
     // Declaramos una variable para el layout alertdialog_new
     private Dialog dialog;
 
+    // Vamos a declarar una variable de tipo long
+    private long timeSecond;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,14 +178,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Creamos un nuevo método para llamar al layout alertdialog_new
-    public void newTime(){
+    public void newTime(Time time){ // Para un new Time recibimos el Time
         // Aquí dentro mandamos a llamar a los componentes
         txtTime = dialog.findViewById(R.id.txtTime);
         txtdescrption = dialog.findViewById(R.id.txtDescription);
         txtDistance = dialog.findViewById(R.id.txtDistance);
         txtDate = dialog.findViewById(R.id.txtDates);
 
+        // y aquí asignamos el valor de la variable recién declarada.
+        timeSecond=(long)Math.abs(timePause/1000); // dividimos entre 1000 por los milisegundos.
 
+        // Y todoo esto nos sirve tanto para agregar como para modificar y
+        // lo hacemos así
+        if(time!=null){ // Si esto es así tenemos que entender que estamos modificando un registro
+            // y siendo así, tenemos que mostrar todos los parámetros que ya tenemos.
+            txtDate.setText(time.getDate()); // Esto se entiende fácil, cogemos el time que recibimos
+            txtDistance.setText(time.getDistance());
+            txtdescrption.setText(time.getDescription());
+            txtTime.setText(time.getTime()); // Este en concreto no va a poder modificarlo por el layout
+
+        } else {
+            // Aquí vamos a convertir el tiempo en minutos horas etc, nuevamente.
+            long hours = timeSecond / 3600;
+            long minutes = (timeSecond%3600) / 60;
+            long seconds = (timeSecond%60);
+
+            // Aquí le damos formato de horas, minutos y segundos
+            txtTime.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+
+
+
+        }
 
     }
 
