@@ -232,7 +232,9 @@ public class MainActivity extends AppCompatActivity {
                     // Le vamos a pasar un , id = 0 , pero en verdad nos da igual porque
                     // nuestra base de datos le va a asignar otro número, el número que
                     // le toque.
-                    new Time(getApplicationContext(), false).save(getData(0));
+                    new Time(getApplicationContext(), true).save(getData(0));
+                } // Esto era necesario porque las cuatro sentencias siguientes deben
+                    // ejecutarse tanto para modificar como para crear nuevo
 
                     // ahora borramos los textos
                     clear();
@@ -242,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
                     dialog.dismiss(); // y hacemos desaparecer el , dialog ,.
                     // Y volvemos a mostrar la información actualizada.
                     ShowListTime();
-                }
+
 
 
             }

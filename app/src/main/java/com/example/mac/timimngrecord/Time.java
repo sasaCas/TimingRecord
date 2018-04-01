@@ -27,7 +27,7 @@ public class Time {
 
     // Añadimos otra estática con el nombre de la tabla para no tener errores en las
     // líneas que estamos añadiendo abajo
-    private static String table = "time";
+    private static final String table = "time";
 
     public Time(){
 

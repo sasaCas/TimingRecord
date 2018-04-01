@@ -96,7 +96,7 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder>{
             });
 
             txtDistance.setText(time.getDistance());
-            txtTime.setText("en " + time.getTime());
+            txtTime.setText(" en " + time.getTime()); // Le doy un espacio porque se juntaba
 
         }
 
