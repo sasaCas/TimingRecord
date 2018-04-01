@@ -250,6 +250,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Vamos a dar funcionalidad al botón CANCELAR
+        dialog.findViewById(R.id.btnCancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Aquí dentro, simplemente hacemos dismiss
+                dialog.dismiss();
+            }
+        });
+
 
     }
 
